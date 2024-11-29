@@ -1,13 +1,28 @@
 // @ts-ignore supertest is not a module
 import request from 'supertest';
 
+import {
+  LIT_EVM_CHAINS,
+  LIT_NETWORK,
+  LIT_NETWORK_VALUES,
+} from '@lit-protocol/constants';
+
 import { app } from '../src/app';
+
+const BASIC_MACHINE_CONFIG = {
+  litNodeClientConfig: {
+    litNetwork: LIT_NETWORK.DatilDev,
+  },
+  litContractsConfig: {},
+  states: [],
+  transitions: [],
+};
 
 describe('Automation Endpoints', () => {
   it('should create a machine and return the correct response', async () => {
     const response = await request(app)
       .post('/automation/create')
-      .send({}); // TODO add machine definition
+      .send(BASIC_MACHINE_CONFIG);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('id');
@@ -19,7 +34,7 @@ describe('Automation Endpoints', () => {
     // First, create a machine
     const createResponse = await request(app)
       .post('/automation/create')
-      .send({}); // TODO add machine definition
+      .send(BASIC_MACHINE_CONFIG);
 
     const machineId = createResponse.body.id;
 
@@ -36,7 +51,7 @@ describe('Automation Endpoints', () => {
     // First, create a machine
     const createResponse = await request(app)
       .post('/automation/create')
-      .send({}); // TODO add machine definition
+      .send(BASIC_MACHINE_CONFIG);
 
     const machineId = createResponse.body.id;
 

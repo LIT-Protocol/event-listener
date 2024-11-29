@@ -7,20 +7,26 @@ const automationRouter = express.Router();
 const machines: Record<string, StateMachine> = {};
 
 automationRouter.post('/automation/create', async (request, response) => {
-  // TODO use request body to create state machines
-  const stateMachine = new StateMachine({});
-  stateMachine.addState({
-    key: 'setup',
-    onEnter: async () => {
-      console.log('Entered setup state');
-    },
-    onExit: async () => {
-      console.log('Exited setup state');
-    },
+  // TODO validate state machine definition
+  console.log(`create machine payload: ${JSON.stringify(request.body)}`);
+
+  const {
+    litContractsConfig,
+    litNodeClientConfig,
+    states,
+    transitions,
+  } = request.body;
+
+  const stateMachine = StateMachine.fromDefinition({
+    debug: true, // TODO remove
+    litContracts: litContractsConfig,
+    litNodeClient: litNodeClientConfig,
+    states,
+    transitions,
   });
 
   if (machines[stateMachine.id]) {
-    // Machine chose an ID that is already in use. Highly unlikely. Make user retry
+    // Machine chose an ID that is already in use. Highly unlikely. Force user to retry
     return response.status(500).json({ error: 'Could not create machine' });
   }
 
