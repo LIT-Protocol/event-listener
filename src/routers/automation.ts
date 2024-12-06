@@ -1,4 +1,3 @@
-import express from 'express';
 import express, { Response } from 'express';
 
 import { StateMachine } from '@lit-protocol/automation';
@@ -21,6 +20,9 @@ automationRouter.post('/automation/create', async (request, response) => {
     console.log(`create machine payload: ${JSON.stringify(request.body)}`);
 
     const {
+      debug = true,
+      privateKey,
+      pkp,
       litContractsConfig,
       litNodeClientConfig,
       states,
@@ -28,9 +30,11 @@ automationRouter.post('/automation/create', async (request, response) => {
     } = request.body;
 
     const stateMachine = StateMachine.fromDefinition({
-      debug: true, // TODO remove
-      litContracts: { debug: true, ...litContractsConfig },
-      litNodeClient: { debug: true, ...litNodeClientConfig },
+      debug,
+      privateKey,
+      pkp,
+      litContracts: { debug, ...litContractsConfig },
+      litNodeClient: { debug, ...litNodeClientConfig },
       states,
       transitions,
     });

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsx src/index.ts",
+    "dev": "tsx --env-file=.env --watch src/index.ts",
     "test": "jest",
     "test:e2e": "jest --config jest.config.js"
   },
