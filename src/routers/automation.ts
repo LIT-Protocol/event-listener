@@ -1,6 +1,6 @@
 import express, { Response } from 'express';
 
-import { StateMachine } from '@lit-protocol/automation';
+import { StateMachine } from '@lit-protocol/event-listener';
 
 const automationRouter = express.Router();
 
@@ -22,7 +22,6 @@ automationRouter.post('/automation/create', async (request, response) => {
     const {
       debug = true,
       privateKey,
-      pkp,
       litContractsConfig,
       litNodeClientConfig,
       states,
@@ -32,7 +31,6 @@ automationRouter.post('/automation/create', async (request, response) => {
     const stateMachine = StateMachine.fromDefinition({
       debug,
       privateKey,
-      pkp,
       litContracts: { debug, ...litContractsConfig },
       litNodeClient: { debug, ...litNodeClientConfig },
       states,

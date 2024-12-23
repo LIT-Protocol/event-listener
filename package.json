@@ -17,10 +17,10 @@
   "license": "ISC",
   "dependencies": {
     "@lit-protocol/auth-helpers": "^7.0.2",
-    "@lit-protocol/automation": "^7.0.2",
     "@lit-protocol/constants": "^7.0.2",
     "@lit-protocol/contracts": "^0.0.74",
     "@lit-protocol/contracts-sdk": "^7.0.2",
+    "@lit-protocol/event-listener": "file:../js-sdk/packages/event-listener",
     "@lit-protocol/lit-auth-client": "^7.0.2",
     "@lit-protocol/lit-node-client": "^7.0.2",
     "ethers": "^5.7.2",
