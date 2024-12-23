@@ -66,7 +66,9 @@ automationRouter.post('/automation/start/:id/:state', async (request, response) 
       return response.status(400).json({ error: 'Machine is already started' });
     }
 
-    await machine.startMachine(state);
+    if (state) {
+      await machine.startMachine(state);
+    }
     response.status(200).json({ id: machine.id, status: machine.status });
   } catch (e) {
     handleError(e, response);

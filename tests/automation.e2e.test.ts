@@ -14,7 +14,11 @@ const BASIC_MACHINE_CONFIG = {
     litNetwork: LIT_NETWORK.DatilDev,
   },
   litContractsConfig: {},
-  states: [],
+  states: [
+    {
+      key: 'setup',
+    },
+  ],
   transitions: [],
 };
 
